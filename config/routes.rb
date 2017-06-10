@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :advertisers
   resources :authors
   devise_for :users
   resources :categories,:articles,:comments,:cart_line_items
