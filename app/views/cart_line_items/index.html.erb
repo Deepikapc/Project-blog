@@ -1,0 +1,28 @@
+<% if @cart_line_items.empty? %>
+<p>You have not added</p>
+<% else %>
+<table border = "1">
+	<thead>
+		<tr>
+			<th>#</th>
+			<th>Article</th>
+			<th>Price</th>
+			<th>Quantity</th>
+			<th>Total</th> 
+		</tr>
+
+	</thead>
+	<body>
+	<% @cart_line_items.each_with_index do |cart_line_item,index| %>
+		<tr>
+			<td><%= index+1 %></td>
+			<td><%= cart_line_item.article.title %></td>
+			<td><%= cart_line_item.article.price %></td>
+			<td><%= cart_line_item.quantity %></td>
+			<td><%#= cart_line_item.article.price * cart_line_item.quantity %></td>
+		</tr>
+		<% end %>
+	</body>
+
+</table>
+<% end %>

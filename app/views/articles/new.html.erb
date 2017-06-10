@@ -1,0 +1,29 @@
+<h2> Create New Title </h2>
+
+<%= form_for @article do |f| %>
+<% if @article.errors.any? %>
+  <% @article.errors.full_messages.each do |msg| %>
+      <li> <%= msg %> </li>
+  <% end %>
+<% end %>
+<%= f.label :category_Name %>
+<%= f.collection_select :category_id,Category.all,:id,:name, prompt: "Select Category" %><br>
+<%= f.label :title %>
+<%= f.text_field :title %><br>
+<%= f.label :body %>
+<%= f.text_field :body %><br>
+<%= f.label :Publish_Date %>
+<%= f.date_select :publish_date %>
+<%#= text_field_tag 'date', nil, :id => 'daily_detail_date' %>
+<%#= f.text_field 'publish_date',:id => 'daily_detail_date' %><br>
+
+<%= f.submit %>
+<% end %>
+
+<%#= @publish_date %>
+
+ <script type="text/javascript">
+      $(document).ready(function() {
+          $("#daily_detail_date").datepicker({dateFormat: "yy-mm-dd"});
+      });
+  </script>

@@ -1,0 +1,17 @@
+<%= @category.name %>
+
+<%= link_to "Edit", edit_category_path(@category.id)%>
+<%= link_to "Destroy",category_path(@category.id),method: :delete, data: {confirm:"Are you sure"} %> :
+<%# articles = Article.where('category_id = ?',@category.id) %>
+
+<% if @article.empty? %>
+	<p> Record  not found </p>
+	<% else %>
+<ol>
+<% @article.each do |article| %>
+<li>  <%= link_to article.title,article_path(article.id) %> - published on - <%= article.publish_date %> </li>
+<% end %>
+</ol>
+<% end %>
+
+<%= link_to "Back",categories_path %>

@@ -1,0 +1,51 @@
+<h1>Single Article </h1> 
+<%= link_to "Edit",edit_article_path(@article.id) %>
+<%= link_to "Destroy",article_path(@article.id),method: :delete %>
+<p>Title: <%= @article.title %></p>
+<p>Body: <%= @article.body %></p>
+<p>Punlish_Date: <%= @article.publish_date %></p>
+<p>Category_Name : <%=@category %>
+<br/>
+<br/>
+
+<h2> Add to cart <h2>
+<%= form_for @cart_line_item do |f| %>
+	<%= f.label :Quantity %>
+	<%= f.select :quantity,[1,2,3,4,5] %><br/>
+	
+	<%= f.hidden_field :article_id,value:@article.id %><br/>
+	<%= f.submit "Add to cart" %>
+<% end %>
+
+<h2>Comment:(<%= @article.comments.length %>)</h2>
+<% @article.comments.each do |comment| %>
+<p> Title:<%= comment.title %></p>
+<p>Body: <%= comment.body %></p>
+
+
+<% if user_signed_in? %>
+	<% if comment.user_id == current_user.id %>
+	<%= link_to "destroy" %>
+<% end %>
+<% end %>
+<br/> 
+<% end %>
+
+<% if user_signed_in? && !current_user.is_admin %>
+   
+	<h2> Add comment </h2>
+	<%= form_for @comment do |f| %>
+
+		<%= f.label :Title %>
+		<%= f.text_field :title %><br/>
+		<%= f.label :Body %>
+		<%= f.text_area :body %><br/>
+		<%= f.hidden_field :article_id,value:@article.id %><br/>
+		<%= f.submit %>
+
+	<% end %>
+	
+<% end %>
+<%= link_to "Back",articles_path %><br/>
+
+

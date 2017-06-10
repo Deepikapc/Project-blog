@@ -1,0 +1,23 @@
+<h2> Editing Article </h2>
+<%= form_for @article do |f| %>
+<% if @article.errors.any? %>
+<ul>
+   <% @article.errors.full_messages.each do|msg| %>
+      <li> <%= msg %></li>
+   <% end %>
+   </ul>
+<% end %>
+<%= f.label :Category_Name %>:
+<%= f.collection_select :category_id,Category.all,:id,:name, prompt: "Select Category" %><br>
+<%= f.label :title %>:
+<%= f.text_field :title %><br>
+<%= f.label :body %>:
+<%= f.text_field :body %><br>
+
+<%= f.label :publish_date %>:
+<%= f.date_select :publish_date %><br>
+
+<%= f.submit %>
+<% end %><br/>
+
+<%= link_to "Back",article_path(@article.id) %>
